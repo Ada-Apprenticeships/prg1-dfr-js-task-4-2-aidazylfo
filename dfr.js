@@ -31,7 +31,17 @@ function dataDimensions(data) {
 
 
 // test 3 
-function findTotal(dataset) {}
+function findTotal(dataset) {
+  function findTotal(dataset) {
+
+    if (!Array. isArray(dataset) || dataset.length === 0) return false;
+    
+    const validNumbers = dataset. filter(value => validNumber (value)) -map (Number) ; 
+    if (validNumbers.length === 0) return false;
+    return validNumbers. reduce(( acc, num) => acc + num, 0);
+    }
+  }
+
 
 
 // test 4 
