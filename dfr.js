@@ -82,6 +82,50 @@ function loadCSV(csvFile, ignoreRows, ignoreCols) {
 
 // test 9
 function createSlice(dataframe, columnIndex, pattern, exportColumns = []) {
+  function sliceDataFrame(data, colIndex, colPattern, exportCols = []) {
+    // Check if the column index is valid
+    if (!Array.isArray(data) || data.length === 0 || colIndex < 0 || colIndex >= Object.keys(data[0]).length) {
+        throw new Error("Invalid input data or column index.");
+    }
+
+    // Determine the column name from the index
+    const colName = Object.keys(data[0])[colIndex];
+    
+    // Create a function to match the column pattern
+    const matchesPattern = (value) => {
+        return colPattern === '*' || value === colPattern;
+    };
+
+    // Filter the rows based on the column pattern
+    const filteredRows = data.filter(row => matchesPattern(row[colName]));
+
+    // If no specific columns are specified, return the filtered rows directly
+    if (exportCols.length === 0) {
+        return filteredRows;
+    }
+
+    // Create the new DataFrame with only the specified columns
+    const slicedData = filteredRows.map(row => {
+        const newRow = {};
+        exportCols.forEach(col => {
+            if (col in row) {
+                newRow[col] = row[col];
+            }
+        });
+        return newRow;
+    });
+
+    return slicedData;
+}
+const data = [
+    { id: 1, name: 'tpc', value: 100 },
+    { id: 2, name: 'abc', value: 200 },
+    { id: 3, name: 'tpc', value: 300 },
+    { id: 4, name: 'xyz', value: 400 }
+];
+
+const slicedData = sliceDataFrame(data, 1, 'tpc', ['id', 'value']);
+console.log(slicedData);
 
 }
 
