@@ -1,15 +1,21 @@
+// test 1
 const fs = require("fs");
 
 function fileExists(filename) {
   return fs.existsSync(filename);
 }
-// test 1
+// test 2
 function validNumber(value) {
   { 
-    return typeof value === 'number' && isFinite(value); // a value is equal to a number or a realistic value 
+      // value can be string or numeric // returns a boolean 
+
+      const number = parseFloat(value); // parseFloat is used to check if value can be converted into a finite number
+      const isValidFormat = /^-?\d+(\.\d+)?$/.test(value); // Regex Check: '^-?\d+(\.\d+)?$' ensures the input has an optional - sign, followed by digits, with an optional decimal portion.
+      return isValidFormat && !isNaN(number) && isFinite(number);
+  
   } };
 
-// test 2 
+// test 3
 function dataDimensions(data) {
 {  
   let rows = -1;
@@ -30,9 +36,9 @@ function dataDimensions(data) {
 } };
 
 
-// test 3 
+// test 4
 function findTotal(dataset) {
-  function findTotal(dataset) {
+   {
 
     if (!Array. isArray(dataset) || dataset.length === 0) return false;
     
