@@ -36,29 +36,32 @@ function dataDimensions(data) {
 } };
 
 
-// test 4
+// test 4 
+// dataset = [[1500.5]] // needs to return 0
 function findTotal(dataset) {
    {
 
-    if (!Array. isArray(dataset) || dataset.length === 0) return false;
+    if (!Array. isArray(dataset) || dataset.length === 0) return 0 ;
+
+   
     
-    const validNumbers = dataset. filter(value => validNumber (value)) -map (Number) ; 
-    if (validNumbers.length === 0) return false;
+    const validNumbers = dataset.filter(value => validNumber (value)).map(Number) ; 
+    if (validNumbers.length === 0) return 0
     return validNumbers. reduce(( acc, num) => acc + num, 0);
     }
   }
 
 
 
-// test 4 
+// test 5 
 function calculateMean(dataset) {
   if (!Array.isArray(dataset) || dataset.length === 0) return false;
  
-  const validNumber = dataset.filter(value => validNumber(value)).map(Number);
- if (validNumber.length === 0 ) return false;
+  const validNumbers = dataset.filter(value => validNumber(value)).map(Number);
+ if (validNumbers.length === 0 ) return false;
  
- const sum = validNumber.reduce((acc,num)=> acc + num, 0);
- return sum / validNumber.length;
+ const sum = validNumbers.reduce((acc,num)=> acc + num, 0);
+ return sum / validNumbers.length;
 }
 
 const dataset1 = [1.5, 1.9, 10.0, 50, -10, '3, 11']; // Renamed ds to dataset1
