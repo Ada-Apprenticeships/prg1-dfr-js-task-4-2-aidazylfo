@@ -80,6 +80,40 @@ console.log(calculateMean("not an array"));          // Output: false
   
 // test 6
 function calculateMedian(data) {
+  function calculateMedian(data) {
+    // Check if the input is a valid array
+    if (!Array.isArray(data) || data.length === 0) return false;
+
+    // Filter to get valid numbers
+    const validNumbers = data.filter(value => typeof value === 'number' && !isNaN(value));
+
+    // If no valid numbers remain, return false
+    if (validNumbers.length === 0) return false;
+
+    // Sort the valid numbers
+    validNumbers.sort((a, b) => a - b);
+    const n = validNumbers.length;
+
+    // Calculate and return the median
+    if (n % 2 === 1) {
+        // Odd length: return the middle element
+        return validNumbers[Math.floor(n / 2)];
+    } else {
+        // Even length: return the average of the two middle elements
+        const mid1 = validNumbers[n / 2 - 1];
+        const mid2 = validNumbers[n / 2];
+        return (mid1 + mid2) / 2;
+    }
+}
+
+// Usage examples
+console.log(calculateMedian([1, 3, 2, 5, 4]));  // Output: 3
+console.log(calculateMedian([1, 2, 3, 4]));      // Output: 2.5
+console.log(calculateMedian([]));                 // Output: false
+console.log(calculateMedian([1, 'a', null, 2])); // Output: 1.5
+console.log(calculateMedian("not an array"));     // Output: false
+
+
   
     if (!Array.isArray(data) || data.length === 0) {  // Check for valid input
         return false;
@@ -102,7 +136,8 @@ function calculateMedian(data) {
     }
 
     return median;
-}
+
+  }
 
 // test 7
 function convertToNumber(dataframe, col) {
@@ -110,8 +145,20 @@ function convertToNumber(dataframe, col) {
 }
 // test 8
 function flatten(dataframe) {
-
+  
+ const dataset = dataframe.map(row => Object.values(row)[0]);
+ return dataset; 
+    
 }
+    const dataframe = [
+      { value: 1500 },
+      { value: 1750 },
+      { value: 1800 },
+      { value: 2000 }
+    ];
+    const dataset = flatten(dataframe);
+    console.log(dataset);
+
 // test 9
           
 function loadCSV(csvFile, ignoreRows, ignoreCols) {
