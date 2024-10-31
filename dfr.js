@@ -116,8 +116,18 @@ console.log(calculateMedian("not an array"));     // Output: false
 
 // test 7
 function convertToNumber(dataframe, col) {
-
+  let countOfColums = 0;
+  dataframe.forEach(row => {
+    if (validNumber(row[col] && typeof row[col] !== 'number') {
+      row[col] = parseInt (row[col])
+      countOfColums ++;
+ 
+  };
+  })
+  return countOfColums;
 }
+
+
 // test 8
 function flatten(dataframe) {
   
@@ -137,6 +147,40 @@ function flatten(dataframe) {
 // test 9
           
 function loadCSV(csvFile, ignoreRows, ignoreCols) {
+  const fs = require('fs');
+
+   {
+      try {
+          // Read the CSV file
+          const data = fs.readFileSync(filePath, 'utf8');
+  
+          // Split the data into rows and trim any whitespace
+          const rows = data.split('\n').map(row => row.split(',').map(cell => cell.trim())).filter(row => row.length > 0);
+  
+          // Original dimensions
+          const originalRows = rows.length;
+          const originalCols = originalRows > 0 ? rows[0].length : 0;
+  
+          // Filter out ignored rows
+          const filteredRows = rows.filter((_, index) => !ignoreRows.includes(index));
+  
+          // Filter out ignored columns
+          const processedData = filteredRows.map(row => 
+              row.filter((_, index) => !ignoreCols.includes(index))
+          );
+  
+          // Return the processed data and original dimensions
+          return [processedData, originalRows, originalCols];
+      } catch (err) {
+          // Return for nonexistent file or read error
+          return [[], -1, -1];
+      }
+  }
+  
+  // Usage example
+  const result = loadCSV('path/to/your/file.csv', [0], [1]);
+  console.log(result);
+  
 }
 
 // test 10
