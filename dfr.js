@@ -79,65 +79,40 @@ console.log(calculateMean("not an array"));          // Output: false
 
   
 // test 6
+
 function calculateMedian(data) {
-  function calculateMedian(data) {
-    // Check if the input is a valid array
-    if (!Array.isArray(data) || data.length === 0) return false;
+  // Check if the input is a valid array
+  if (!Array.isArray(data) || data.length === 0) return false;
 
-    // Filter to get valid numbers
-    const validNumbers = data.filter(value => typeof value === 'number' && !isNaN(value));
+  // Convert all values to numbers, filtering out invalid numbers
+  const validNumbers = data.map(Number).filter(value => typeof value === 'number' && !isNaN(value));
 
-    // If no valid numbers remain, return false
-    if (validNumbers.length === 0) return false;
+  // If no valid numbers remain, return false
+  if (validNumbers.length === 0) return false;
 
-    // Sort the valid numbers
-    validNumbers.sort((a, b) => a - b);
-    const n = validNumbers.length;
+  // Sort the valid numbers
+  validNumbers.sort((a, b) => a - b);
+  const n = validNumbers.length;
 
-    // Calculate and return the median
-    if (n % 2 === 1) {
-        // Odd length: return the middle element
-        return validNumbers[Math.floor(n / 2)];
-    } else {
-        // Even length: return the average of the two middle elements
-        const mid1 = validNumbers[n / 2 - 1];
-        const mid2 = validNumbers[n / 2];
-        return (mid1 + mid2) / 2;
-    }
+  // Calculate and return the median
+  if (n % 2 === 1) {
+      // Odd length: return the middle element
+      return validNumbers[Math.floor(n / 2)];
+  } else {
+      // Even length: return the average of the two middle elements
+      const mid1 = validNumbers[n / 2 - 1];
+      const mid2 = validNumbers[n / 2];
+      return (mid1 + mid2) / 2;
+  }
 }
 
 // Usage examples
 console.log(calculateMedian([1, 3, 2, 5, 4]));  // Output: 3
-console.log(calculateMedian([1, 2, 3, 4]));      // Output: 2.5
+console.log(calculateMedian([1, '2', null, 3])); // Output: 2
 console.log(calculateMedian([]));                 // Output: false
 console.log(calculateMedian([1, 'a', null, 2])); // Output: 1.5
 console.log(calculateMedian("not an array"));     // Output: false
 
-
-  
-    if (!Array.isArray(data) || data.length === 0) {  // Check for valid input
-        return false;
-    }
-
-    const validData = data.filter(x => typeof x === 'number'); // Filter out invalid (non-numeric) values
-
-    if (validData.length === 0) {    // If no valid data remains
-        return false;
-    }
-
-    validData.sort((a, b) => a - b);     // Sort the valid data
-    const n = validData.length;
-
-    let median;
-    if (n % 2 === 1) {
-        median = validData[Math.floor(n / 2)] // Odd length: return the middle element
-    } else {
-        median = (validData[n / 2 - 1] + validData[n / 2]) / 2;  // Even length: return the average of the two middle elements
-    }
-
-    return median;
-
-  }
 
 // test 7
 function convertToNumber(dataframe, col) {
