@@ -59,15 +59,19 @@ function dataDimensions(data) {
 // test 5 
 
 function calculateMean(dataset) {
-  if (!Array.isArray(dataset) || dataset.length === 0) return false;
- 
-  const validNumbers = dataset.filter(value => validNumber(value)).map(Number);
- if (validNumbers.length === 0 ) return false;
- 
- const sum = validNumbers.reduce((acc,num)=> acc + num, 0);
- return sum / validNumbers.length;
+  if (dataDimensions(dataset)[1] !==-1 || dataset.length ===0) {
+      return 0;
+  }
+  let sum = 0;
+  let count = 0;
+  for (let i =0; i<dataset.length; i++) {
+     if (validNumber(dataset[i])) {
+      sum += parseFloat(dataset[i]);
+      count ++;
+     }
+  }
+  return count >0 ? sum/count :0; // returns sum divided by count
 }
-
   
 // test 6
 
