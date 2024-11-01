@@ -1,23 +1,16 @@
 // test 1
 const fs = require("fs");
-
 function fileExists(filename) {
   return fs.existsSync(filename);
 }
 // test 2
-function validNumber(value) {
-  { 
-      // value can be string or numeric // returns a boolean 
-
+function validNumber(value) {{ 
       const number = parseFloat(value); // parseFloat is used to check if value can be converted into a finite number
       const isValidFormat = /^-?\d+(\.\d+)?$/.test(value); // Regex Check: '^-?\d+(\.\d+)?$' ensures the input has an optional - sign, followed by digits, with an optional decimal portion.
       return isValidFormat && !isNaN(number) && isFinite(number);
-  
-  } };
-
+  }};
 // test 3
-function dataDimensions(data) {
-{  
+function dataDimensions(data) {{  
   let rows = -1;
   let cols = -1;
   if (data == null) { // Check if the input is null or undefined
@@ -33,17 +26,12 @@ function dataDimensions(data) {
       cols = Object.keys(data).length;
   }
   return [rows, cols];
-} };
-
-
+}};
 // test 4 
-
   function findTotal(dataset) {
-    // Check if dataset is not a 1D array or is empty
-    if (dataDimensions(dataset)[1] !== -1 || dataset.length === 0) {
+    if (dataDimensions(dataset)[1] !== -1 || dataset.length === 0) { // Check if dataset is not a 1D array or is empty
         return 0; 
     }
-    
     let total = 0;
     for (let i = 0; i < dataset.length; i++) {
         if (validNumber(dataset[i])) {
@@ -52,12 +40,7 @@ function dataDimensions(data) {
     }
     return total;
 }
-  
-  
-
-
 // test 5 
-
 function calculateMean(dataset) {
   if (dataDimensions(dataset)[1] !==-1 || dataset.length ===0) {
       return 0;
@@ -72,9 +55,7 @@ function calculateMean(dataset) {
   }
   return count >0 ? sum/count :0; // returns sum divided by count
 }
-  
 // test 6
-
 function calculateMedian(dataset) {
   if (dataDimensions(dataset)[1] !== -1 || dataset.length === 0) {
       return 0;
@@ -85,7 +66,6 @@ function calculateMedian(dataset) {
       ? (validNumbers[mid - 1] + validNumbers[mid]) / 2
       : validNumbers[mid];
 }
-
 // test 7
 function convertToNumber(dataframe, col) {
     let countOfColumns = 0;
@@ -97,14 +77,10 @@ function convertToNumber(dataframe, col) {
     })
     return countOfColumns;
 }
-
-
 // test 8
 function flatten(dataframe) {
-  
  const dataset = dataframe.map(row => Object.values(row)[0]);
  return dataset; 
-    
 }
     const dataframe = [
       { value: 1500 },
@@ -113,10 +89,7 @@ function flatten(dataframe) {
       { value: 2000 }
     ];
     const dataset = flatten(dataframe);
-    //console.log(dataset);
-
-// test 9
-          
+// test 9     
 function loadCSV(csvFile, ignoreRows, ignoreCols) {
   const fs = require('fs');
   {
@@ -137,53 +110,26 @@ function loadCSV(csvFile, ignoreRows, ignoreCols) {
          return [processedData, originalRows, originalCols]; // Return the processed data and original dimensions
       }  catch (err) {
          return [[], -1, -1]; // Return for nonexistent file or read error
-      }
-  } 
-}
-
+      }}};
 // test 10
-
   function createSlice(dataframe,columnIndex,pattern, exportedColumns = []) {
     if (!Array.isArray(dataframe) || dataframe.length === 0 || columnIndex <0) {
      return [];
     }
      const result = [];
- 
      for (const row of dataframe) {
      if (!Array.isArray(row) || row.length <= columnIndex) continue;
- 
-     const cellValue = row[columnIndex];
-        
+     const cellValue = row[columnIndex];       
   const matchesPattern= (pattern === '*' || String(cellValue) === String(pattern));
- 
          if (matchesPattern) { 
           const RowOutput = exportedColumns.length > 0 
                ? exportedColumns.map(colIndex => (row[colIndex] !== undefined ? row[colIndex] : null))
                : row;
-           
              result.push(RowOutput);
-           } 
-         }
-         
- 
-         return result;
-         
+           }}
+         return result;      
     }
-
-
-
-
-// const slicedData = sliceDataFrame(data, 1, 'tpc', ['id', 'value']);
-// console.log(slicedData);
-
-
-
-
-
-
-
-// function createSlice(dataframe, columnIndex, pattern, exportColumns = [])
-
+    
 module.exports = {
   fileExists,
   validNumber,
