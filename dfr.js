@@ -143,8 +143,33 @@ function loadCSV(csvFile, ignoreRows, ignoreCols) {
 
 // test 10
 
-function createSlice(dataframe, columnIndex, pattern, exportColumns = []) {
-}
+  function createSlice(dataframe,columnIndex,pattern, exportedColumns = []) {
+    if (!Array.isArray(dataframe) || dataframe.length === 0 || columnIndex <0) {
+     return [];
+    }
+     const result = [];
+ 
+     for (const row of dataframe) {
+     if (!Array.isArray(row) || row.length <= columnIndex) continue;
+ 
+     const cellValue = row[columnIndex];
+        
+  const matchesPattern= (pattern === '*' || String(cellValue) === String(pattern));
+ 
+         if (matchesPattern) { 
+          const RowOutput = exportedColumns.length > 0 
+               ? exportedColumns.map(colIndex => (row[colIndex] !== undefined ? row[colIndex] : null))
+               : row;
+           
+             result.push(RowOutput);
+           } 
+         }
+         
+ 
+         return result;
+         
+    }
+
 
 
 
