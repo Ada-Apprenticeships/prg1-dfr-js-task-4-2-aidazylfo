@@ -37,21 +37,23 @@ function dataDimensions(data) {
 
 
 // test 4 
-// dataset = [[1500.5]] // needs to return 0
-function findTotal(dataset) {
-   {
 
-    if (!Array.isArray(dataset) || dataset.length === 0) return 0 ;
-   
-    const validNumber = value => typeof value === 'number' && !isNaN(value);
-   
-    
-    const validNumbers = dataset.filter(value => validNumber (value)).map(Number) ; 
-    if (validNumbers.length === 0) return 0
-    return validNumbers. reduce(( acc, num) => acc + num, 0);
+  function findTotal(dataset) {
+    // Check if dataset is not a 1D array or is empty
+    if (dataDimensions(dataset)[1] !== -1 || dataset.length === 0) {
+        return 0; 
     }
-  }
-
+    
+    let total = 0;
+    for (let i = 0; i < dataset.length; i++) {
+        if (validNumber(dataset[i])) {
+            total += parseFloat(dataset[i]); 
+        }
+    }
+    return total;
+}
+  
+  
 
 
 // test 5 
@@ -65,17 +67,6 @@ function calculateMean(dataset) {
  const sum = validNumbers.reduce((acc,num)=> acc + num, 0);
  return sum / validNumbers.length;
 }
-
-// Usage examples
-console.log(calculateMean([1, 2, 3]));              // Output: 2
-console.log(calculateMean([1, 'a', null, 3]));      // Output: 2
-console.log(calculateMean([]));                       // Output: false
-console.log(calculateMean([NaN, undefined, 5]));    // Output: false
-console.log(calculateMean("not an array"));          // Output: false
-
-
-
-
 
   
 // test 6
@@ -107,11 +98,12 @@ function calculateMedian(data) {
 } 
 
 // Usage examples
+/*
 console.log(calculateMedian([1, 3, 2, 5, 4]));  // Output: 3
 console.log(calculateMedian([1, '2', null, 3])); // Output: 2
 console.log(calculateMedian([]));                 // Output: false
 console.log(calculateMedian([1, 'a', null, 2])); // Output: 1.5
-console.log(calculateMedian("not an array"));     // Output: false
+console.log(calculateMedian("not an array"));     // Output: false */
 
 
 // test 7
@@ -141,7 +133,7 @@ function flatten(dataframe) {
       { value: 2000 }
     ];
     const dataset = flatten(dataframe);
-    console.log(dataset);
+    //console.log(dataset);
 
 // test 9
           
@@ -173,6 +165,7 @@ function loadCSV(csvFile, ignoreRows, ignoreCols) {
 
 function createSlice(dataframe, columnIndex, pattern, exportColumns = []) {
 }
+
 
 
 // const slicedData = sliceDataFrame(data, 1, 'tpc', ['id', 'value']);
