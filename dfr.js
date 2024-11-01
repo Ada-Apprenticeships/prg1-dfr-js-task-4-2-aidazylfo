@@ -68,15 +68,16 @@ function calculateMedian(dataset) {
       : validNumbers[mid];
 }
 // test 7
-function convertToNumber(dataframe, col) {
-    let countOfColumns = 0;
-    dataframe.forEach(row => { // It loops through every row of the dataframe.
-      if (validNumber(row[col]) && typeof row[col] !== 'number') { // It makes sure that the value in the specified column of the current row is valid for conversion.
-        row[col] = parseInt(row[col]) // It converts valid but non-numeric representations (like strings) in the specified column of the current row, into integers.
-      };
-    })
-    return countOfColumns;
-}
+    function convertToNumber(dataframe, col) {
+      let countOfColumns = 0;
+      dataframe.forEach(row => { // It loops through every row of the dataframe.
+        if (validNumber(row[col]) && typeof row[col] !== 'number') { // It makes sure that the value in the specified column of the current row is valid for conversion.
+          row[col] = parseInt(row[col]) // It converts valid but non-numeric representations (like strings) in the specified column of the current row, into integers.
+          countOfColumns ++;
+        };
+      })
+      return countOfColumns;
+  }
 // test 8
 function flatten(dataframe) {
  const dataset = dataframe.map(row => Object.values(row)[0]); // It creates a new array that consists of the first value from each object in the dataframe.
