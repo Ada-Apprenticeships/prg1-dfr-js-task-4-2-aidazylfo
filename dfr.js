@@ -104,7 +104,7 @@ function calculateMedian(data) {
       const mid2 = validNumbers[n / 2];
       return (mid1 + mid2) / 2;
   }
-}
+} 
 
 // Usage examples
 console.log(calculateMedian([1, 3, 2, 5, 4]));  // Output: 3
@@ -116,15 +116,14 @@ console.log(calculateMedian("not an array"));     // Output: false
 
 // test 7
 function convertToNumber(dataframe, col) {
-  let countOfColums = 0;
-  dataframe.forEach(row => {
-    if (validNumber(row[col] && typeof row[col] !== 'number') {
-      row[col] = parseInt (row[col])
-      countOfColums ++;
- 
-  };
-  })
-  return countOfColums;
+    let countOfColumns = 0;
+    dataframe.forEach(row => {
+      if (validNumber(row[col]) && typeof row[col] !== 'number') {
+        row[col] = parseInt(row[col])
+        countOfColumns ++;
+      };
+    })
+    return countOfColumns;
 }
 
 
@@ -151,29 +150,22 @@ function loadCSV(csvFile, ignoreRows, ignoreCols) {
 
    {
       try {
-          // Read the CSV file
-          const data = fs.readFileSync(filePath, 'utf8');
+          const data = fs.readFileSync(csvFile, 'utf8'); // Read the CSV fil
   
-          // Split the data into rows and trim any whitespace
-          const rows = data.split('\n').map(row => row.split(',').map(cell => cell.trim())).filter(row => row.length > 0);
+          const rows = data.split('\n').map(row => row.split(',').map(cell => cell.trim())).filter(row => row.length > 0); // Split the data into rows and trim any whitespace
   
-          // Original dimensions
-          const originalRows = rows.length;
+          const originalRows = rows.length;// Original dimensions
           const originalCols = originalRows > 0 ? rows[0].length : 0;
   
-          // Filter out ignored rows
-          const filteredRows = rows.filter((_, index) => !ignoreRows.includes(index));
+          const filteredRows = rows.filter((_, index) => !ignoreRows.includes(index));  // Filter out ignored rows
   
-          // Filter out ignored columns
-          const processedData = filteredRows.map(row => 
+          const processedData = filteredRows.map(row => // Filter out ignored columns
               row.filter((_, index) => !ignoreCols.includes(index))
           );
   
-          // Return the processed data and original dimensions
-          return [processedData, originalRows, originalCols];
+          return [processedData, originalRows, originalCols]; // Return the processed data and original dimensions
       } catch (err) {
-          // Return for nonexistent file or read error
-          return [[], -1, -1];
+          return [[], -1, -1]; // Return for nonexistent file or read error
       }
   }
   
