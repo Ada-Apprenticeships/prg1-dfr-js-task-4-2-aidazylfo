@@ -147,32 +147,26 @@ function flatten(dataframe) {
           
 function loadCSV(csvFile, ignoreRows, ignoreCols) {
   const fs = require('fs');
-
-   {
-      try {
-          const data = fs.readFileSync(csvFile, 'utf8'); // Read the CSV fil
+  {
+    try {
+         const data = fs.readFileSync(csvFile, 'utf8'); // Read the CSV fil
   
-          const rows = data.split('\n').map(row => row.split(',').map(cell => cell.trim())).filter(row => row.length > 0); // Split the data into rows and trim any whitespace
+         const rows = data.split('\n').map(row => row.split(',').map(cell => cell.trim())).filter(row => row.length > 0); // Split the data into rows and trim any whitespace
   
-          const originalRows = rows.length;// Original dimensions
-          const originalCols = originalRows > 0 ? rows[0].length : 0;
+         const originalRows = rows.length;// Original dimensions
+         const originalCols = originalRows > 0 ? rows[0].length : 0;
   
-          const filteredRows = rows.filter((_, index) => !ignoreRows.includes(index));  // Filter out ignored rows
+         const filteredRows = rows.filter((_, index) => !ignoreRows.includes(index));  // Filter out ignored rows
   
-          const processedData = filteredRows.map(row => // Filter out ignored columns
-              row.filter((_, index) => !ignoreCols.includes(index))
+         const processedData = filteredRows.map(row => // Filter out ignored columns
+            row.filter((_, index) => !ignoreCols.includes(index))
           );
   
-          return [processedData, originalRows, originalCols]; // Return the processed data and original dimensions
-      } catch (err) {
-          return [[], -1, -1]; // Return for nonexistent file or read error
+         return [processedData, originalRows, originalCols]; // Return the processed data and original dimensions
+      }  catch (err) {
+         return [[], -1, -1]; // Return for nonexistent file or read error
       }
-  }
-  
-  // Usage example
-  const result = loadCSV('path/to/your/file.csv', [0], [1]);
-  console.log(result);
-  
+  } 
 }
 
 // test 10
